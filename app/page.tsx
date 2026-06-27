@@ -33,6 +33,7 @@ const [loading, setLoading] = useState(true);
 const offers = ["/offer1.jpg", "/offer2.jpg"];
 
 const [currentOffer, setCurrentOffer] = useState(0);
+const [scrolled, setScrolled] = useState(false);
 
 
 
@@ -65,10 +66,6 @@ if (!date) {
   alert("Please select an appointment date");
   return;
 }
-
-
-
-
 
   try {
 
@@ -127,6 +124,18 @@ window.open(
   }
 
 };
+
+useEffect(() => {
+  const handleScroll = () => {
+    setScrolled(window.scrollY > 40);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
+
    useEffect(() => {
   const timer = setTimeout(() => {
     setLoading(false);
@@ -227,9 +236,14 @@ if (loading) {
   </div>
 
 </div>
-      <nav className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-sky-100 shadow-sm">
 
-  <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <nav
+  className={`sticky top-0 z-50 backdrop-blur-xl bg-white/90 border-b border-sky-100 shadow-sm transition-all duration-300 ${
+    scrolled ? "py-1" : "py-3"
+  }`}
+>
+
+  <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-6">
 
   {/* Logo */}
 
@@ -241,7 +255,9 @@ if (loading) {
       width={220}
       height={220}
       priority
-      className="w-auto h-auto"
+      className={`w-auto transition-all duration-300 ${
+  scrolled ? "h-10" : "h-14"
+}`}
     />
 
   </div>
@@ -294,7 +310,7 @@ if (loading) {
   {/* Mobile Button */}
 
   <button
-    className="lg:hidden text-3xl"
+    className="lg:hidden text-2xl p-2"
     onClick={() => setMenuOpen(!menuOpen)}
   >
     ☰
@@ -336,23 +352,29 @@ if (loading) {
 
       {/* Hero Section */}
 
-      <section
-  id="home"
-  className="relative min-h-screen overflow-hidden bg-gradient-to-br from-cyan-50 via-sky-100 to-blue-200 px-6"
-  style={{ backgroundImage: "url('/hero.jpg')" }}
+      <section id="home"
+
+  className="relative min-h-[90vh] md:min-h-screen overflow-hidden bg-gradient-to-br from-cyan-50 via-sky-100 to-blue-200 px-5 md:px-6"
+  style={{
+  backgroundImage: "url('/hero.jpg')",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+}}
 >
+  
   <div className="absolute top-0 left-0 w-72 h-72 bg-cyan-300/30 rounded-full blur-3xl"></div>
 
 <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl"></div>
 
 <div className="absolute top-40 right-20 w-40 h-40 bg-sky-300/30 rounded-full blur-2xl"></div>
-  
-  <div className="relative z-10 text-center max-w-3xl mx-auto py-28">
-    <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 leading-tight">
+  <div className="absolute inset-0 bg-white/55"></div>
+  <div className="relative z-10 text-center max-w-4xl mx-auto pt-24 pb-16 md:py-28">
+    <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-slate-900 leading-tight tracking-tight">
       Advanced Dental Care for a Confident Smile
     </h1>
 
-    <p className="mt-6 text-xl text-slate-600 leading-9">
+    <p className="mt-5 text-base sm:text-lg md:text-xl text-slate-700 leading-7 md:leading-9 max-w-2xl mx-auto">
       Expert Dental Treatments, Advanced Technology, and Personalized Care for Every Patient in Greater Noida.
     </p>
 
@@ -483,11 +505,11 @@ if (loading) {
 
       </div>
 
-      <h3 className="text-xl font-bold mt-6 group-hover:text-white">
-        {service.title}
-      </h3>
+      <h3 className="text-xl font-bold mt-6 text-slate-800 group-hover:text-white">
+  {service.title}
+</h3>
 
-      <p className="mt-3 text-sm text-gray-500 group-hover:text-blue-100">
+      <p className="mt-3 text-sm text-gray-600 group-hover:text-blue-100">
         Advanced dental treatment with modern technology and expert care.
       </p>
 
@@ -683,132 +705,99 @@ if (loading) {
           
 
 
-
-      {/* Appointment Form */}
-
-<section id="contact" className="py-16 px-6 bg-sky-50">
+{/* Appointment Form */}
+<section id="contact" className="py-16 px-6 bg-gradient-to-r from-sky-100 to-white">
 
   <div className="max-w-3xl mx-auto">
 
-    <h2 className="text-4xl font-bold text-center mb-8">
+    <h2 className="text-3xl md:text-4xl font-extrabold text-center text-slate-900 mb-3">
+  Book Your Appointment
+</h2>
 
-      Appointment Page
+<p className="text-center text-gray-600 mb-10">
+  Schedule your visit with our experienced dental specialists.
+</p>
 
-    </h2>
+    {/* Card wrapper */}
+    <div className="bg-gradient-to-r from-sky-600 to-cyan-500 text-white py-4 rounded-xl font-bold shadow-lg hover:scale-105 transition duration-300">
 
+      <form onSubmit={handleAppointment} className="grid gap-5">
 
+        <input
+          type="text"
+          placeholder="Full Name"
+          required
+          className="border border-gray-300 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-400"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
 
+        <input
+          type="tel"
+          placeholder="Mobile Number"
+          required
+          value={mobile}
+          onChange={(e) => setMobile(e.target.value)}
+          className="border border-gray-300 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-400"
+        />
 
+        <input
+          type="email"
+          placeholder="Email Address"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="border border-gray-300 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-400"
+        />
 
-    <form onSubmit={handleAppointment} className="grid gap-4">
+        <select
+          required
+          value={treatment}
+          onChange={(e) => setTreatment(e.target.value)}
+          className="border border-gray-300 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-400"
+        >
+          <option value="">Select Treatment</option>
+          <option>Dental Implants</option>
+          <option>Root Canal Treatment</option>
+          <option>Teeth Whitening</option>
+          <option>Braces & Aligners</option>
+          <option>Smile Designing</option>
+          <option>Cosmetic Dentistry</option>
+          <option>Dental Consultation</option>
+          <option>Crowns and Bridges</option>
+          <option>Veneers</option>
+          <option>Dentures</option>
+          <option>Scaling and Polishing</option>
+          <option>Wisdom Tooth Extraction</option>
+          <option>Pediatric Dentistry</option>
+          <option>Emergency Dental Care</option>
+        </select>
 
-      <input
+        <input
+          type="date"
+          min={new Date().toISOString().split("T")[0]}
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          className="border border-gray-300 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-400"
+        />
 
-        type="text"
+        <button
+          type="submit"
+          className="bg-sky-600 hover:bg-sky-700 text-white py-3 rounded-lg font-semibold transition"
+        >
+          Book Now
+        </button>
 
-        placeholder="Full Name"
-        required
+      </form>
 
-        className="border p-3 rounded-lg"
-
-        value={name}
-
-        onChange={(e) => setName(e.target.value)}
-
-      />
-
-
-
-      <input
-
-        type="tel"
-
-        placeholder="Mobile Number"
-        required
-
-        value={mobile}
-
-        onChange={(e)=> setMobile(e.target.value)}
-
-        className="border p-3 rounded-lg"
-
-      />
-
-
-
-      <input
-
-        type="email"
-
-        placeholder="Email Address"
-        required
-
-        value={email}
-
-        onChange={(e) => setEmail(e.target.value)}
-
-        className="border p-3 rounded-lg"
-
-      />
-
-
-
-      <select 
-      required
-
-       value={treatment}
-
-       onChange={(e) => setTreatment(e.target.value)}
-
-       className="border p-3 rounded-lg">
-
-        <option>Select Treatment</option>
-
-        <option>Dental Implants</option>
-        <option>Root Canal Treatment</option>
-        <option>Teeth Whitening</option>
-         <option>Braces & Aligners</option>
-         <option>Smile Designing</option>
-         <option>Cosmetic Dentistry</option>
-         <option>Dental Consultation</option>
-         <option>Crowns and Bridges</option>
-         <option>veeners</option>
-         <option>Dentures</option>
-         <option>Scaling and polishing</option>
-         <option>Wisdom tooth Extraction</option>
-         <option>Pediatric Dentistry</option>
-         <option>Emergency Dental Care</option>
-         <option>Braces & Aligners</option>
-
-      </select>
-
-      <input
-  type="date"
-  min={new Date().toISOString().split("T")[0]}
-  value={date}
-  onChange={(e) => setDate(e.target.value)}
-  className="border p-3 rounded-lg"
-/>
-
-
-
-      <button
-
-        type="submit"
-
-        className="bg-sky-600 text-white py-3 rounded-lg"
-
-      >
-
-        Book Now
-
-      </button>
-
-    </form>
-
+    </div>
   </div>
-
 </section>
+      
+
+
+
+    
 
 
 
