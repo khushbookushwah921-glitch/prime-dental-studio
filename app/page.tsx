@@ -30,10 +30,22 @@ const [treatment, setTreatment] = useState("");
 const [date, setDate] = useState("");
 const [menuOpen, setMenuOpen] = useState(false);
 const [loading, setLoading] = useState(true);
+ const [showTopButton, setShowTopButton] = useState(false);
 const offers = ["/offer1.jpg", "/offer2.jpg"];
 
 const [currentOffer, setCurrentOffer] = useState(0);
 const [scrolled, setScrolled] = useState(false);
+useEffect(() => {
+  if (menuOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+
+  return () => {
+    document.body.style.overflow = "auto";
+  };
+}, [menuOpen]);
 
 
 
@@ -84,6 +96,8 @@ if (!date) {
       createdAt: new Date(),
 
     });
+
+   
 
 
 
@@ -150,6 +164,16 @@ useEffect(() => {
   }, 3000);
 
   return () => clearInterval(interval);
+}, []);
+
+useEffect(() => {
+  const handleScroll = () => {
+    setShowTopButton(window.scrollY > 400);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
+  return () => window.removeEventListener("scroll", handleScroll);
 }, []);
 
 
@@ -238,27 +262,27 @@ if (loading) {
 </div>
 
       <nav
-  className={`sticky top-0 z-50 backdrop-blur-xl bg-white/90 border-b border-sky-100 shadow-sm transition-all duration-300 ${
-    scrolled ? "py-1" : "py-3"
+  className={` relative sticky top-0 z-50 bg-white border-b border-sky-100 shadow-md transition-all duration-300 ${
+    scrolled ? "py-2" : "py-4"
   }`}
 >
 
-  <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-6">
+ <div className="max-w-7xl mx-auto flex items-center justify-between px-5 lg:px-8 py-4">
 
   {/* Logo */}
 
   <div className="flex items-center gap-3">
 
     <Image
-      src="/logo.png"
-      alt="Prime Dental Studio"
-      width={220}
-      height={220}
-      priority
-      className={`w-auto transition-all duration-300 ${
-  scrolled ? "h-10" : "h-14"
-}`}
-    />
+  src="/logo.png"
+  alt="Prime Dental Studio"
+  width={180}
+  height={60}
+  priority
+  className={`w-auto transition-all duration-300 ${
+    scrolled ? "h-10" : "h-12"
+  }`}
+/>
 
   </div>
 
@@ -283,7 +307,7 @@ if (loading) {
   <div className="hidden lg:flex items-center gap-4">
 
     <a
-      href="tel:+918743440176"
+      href="tel:+919343460176"
       className="flex items-center gap-2 text-gray-700 font-semibold"
     >
       
@@ -291,7 +315,7 @@ if (loading) {
     </a>
 
     <a
-      href="https://wa.me/91 9343460176"
+      href="https://wa.me/919343460176"
       target="_blank"
       className="bg-green-500 text-white p-3 rounded-full hover:scale-110 transition"
     >
@@ -310,11 +334,11 @@ if (loading) {
   {/* Mobile Button */}
 
   <button
-    className="lg:hidden text-2xl p-2"
-    onClick={() => setMenuOpen(!menuOpen)}
-  >
-    ☰
-  </button>
+onClick={() => setMenuOpen(!menuOpen)}
+className="lg:hidden w-11 h-11 rounded-xl border border-sky-200 flex items-center justify-center text-2xl bg-white shadow-sm"
+>
+{menuOpen ? "✕" : "☰"}
+</button>
 
 </div>
     
@@ -323,26 +347,44 @@ if (loading) {
   {/* Mobile Menu */}
 
   {menuOpen && (
+  <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-2xl border-t border-sky-100 animate-in slide-in-from-top duration-300">
 
-    <div className="lg:hidden bg-white px-6 pb-6 flex flex-col gap-4">
+    <div className="flex flex-col py-4">
 
-      <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
-      <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-      <a href="#services" onClick={() => setMenuOpen(false)}>Services</a>
-      <a href="#doctors" onClick={() => setMenuOpen(false)}>Doctors</a>
-      <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+      {[
+        { name: "Home", link: "#home" },
+        { name: "About", link: "#about" },
+        { name: "Services", link: "#services" },
+        { name: "Doctors", link: "#doctors" },
+        { name: "Contact", link: "#contact" },
+      ].map((item) => (
+        <a
+          key={item.name}
+          href={item.link}
+          onClick={() => setMenuOpen(false)}
+          className="px-6 py-4 text-gray-800 font-semibold border-b border-sky-50 hover:bg-sky-50 hover:text-sky-600 transition-all"
+        >
+          {item.name}
+        </a>
+      ))}
 
-      <a
-        href="#contact"
-        className="bg-sky-600 text-white text-center py-3 rounded-full"
-        onClick={() => setMenuOpen(false)}
-      >
-        Book Appointment
-      </a>
+      <div className="px-6 pt-5">
+
+        <a
+          href="#contact"
+          onClick={() => setMenuOpen(false)}
+          className="block w-full bg-gradient-to-r from-sky-600 to-cyan-500 text-white text-center py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition"
+        >
+          Book Appointment
+        </a>
+
+      </div>
 
     </div>
 
-  )}
+  </div>
+)}
+
 
 </nav>
 
@@ -368,15 +410,57 @@ if (loading) {
 <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl"></div>
 
 <div className="absolute top-40 right-20 w-40 h-40 bg-sky-300/30 rounded-full blur-2xl"></div>
-  <div className="absolute inset-0 bg-white/55"></div>
-  <div className="relative z-10 text-center max-w-4xl mx-auto pt-24 pb-16 md:py-28">
-    <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-slate-900 leading-tight tracking-tight">
+  <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/75 to-white/60"></div>
+  <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center justify-center text-center min-h-[90vh] px-4 py-24">
+    <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-slate-900 leading-tight tracking-tight max-w-4xl">
       Advanced Dental Care for a Confident Smile
     </h1>
 
-    <p className="mt-5 text-base sm:text-lg md:text-xl text-slate-700 leading-7 md:leading-9 max-w-2xl mx-auto">
+    <p className="mt-6 text-lg md:text-xl text-slate-700 leading-8 max-w-3xl">
       Expert Dental Treatments, Advanced Technology, and Personalized Care for Every Patient in Greater Noida.
     </p>
+    <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+
+  <div className="bg-white shadow-lg rounded-full px-6 py-3 border border-sky-100">
+    ⭐⭐⭐⭐⭐ Trusted by Hundreds of Patients
+  </div>
+
+  <div className="bg-sky-600 text-white rounded-full px-6 py-3 shadow-lg">
+    Open 24×7
+  </div>
+
+  <div className="mt-8 inline-flex items-center gap-2 bg-green-100 text-green-700 px-5 py-3 rounded-full border border-green-200 font-semibold shadow-sm">
+  🎉 Consultation Fee: <span className="font-bold">₹200 </span>
+</div>
+
+</div>
+ <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+
+  <a
+    href="#appointment"
+    className="bg-gradient-to-r from-sky-600 to-cyan-500 text-white px-8 py-4 rounded-full font-semibold shadow-xl hover:scale-105 transition"
+  >
+    Book Appointment
+  </a>
+   
+
+  <a
+    href="tel:+919343460176"
+    className="border-2 border-sky-600 text-sky-700 px-8 py-4 rounded-full font-semibold hover:bg-sky-600 hover:text-white transition"
+  >
+    Call Now
+  </a>
+
+  <a
+    href="https://wa.me/919343460176"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="bg-green-500 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:scale-105 transition"
+  >
+    WhatsApp
+  </a>
+
+</div>
 
   </div>
 </section>
@@ -439,7 +523,7 @@ if (loading) {
 
 {/* About Us */}
 
-<section id="about" className="py-20 bg-sky-50 px-6">
+<section id= "about" className="py-20 bg-gradient-to-b from-sky-50 to-white px-5 lg:px-6">
 
   <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
 
@@ -447,17 +531,17 @@ if (loading) {
 
     <div>
 
-      <h2 className="text-4xl font-bold text-gray-800 mb-6">
+      <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6">
         About Prime Dental Studio
       </h2>
 
-      <p className="text-gray-600 text-lg leading-8 mb-6">
+      <p className="text-gray-700 text-base md:text-lg leading-8 mb-6">
         At <span className="font-semibold text-sky-600">Prime Dental Studio</span>,
         we are dedicated to providing exceptional dental care with advanced technology,
         experienced doctors, and a patient-first approach.
       </p>
 
-      <p className="text-gray-600 leading-8">
+      <p className="text-gray-700 leading-8">
         Whether it's a routine check-up, cosmetic smile makeover, dental implants,
         or emergency treatment, we ensure every patient receives comfortable,
         painless, and personalized dental care.
@@ -468,7 +552,7 @@ if (loading) {
     {/* Right Side */}
 
     <div className="flex justify-center">
-  <div className="relative w-full max-w-md h-80 rounded-3xl overflow-hidden shadow-2xl">
+  <div className="relative w-full max-w-md h-[350px] rounded-[30px] overflow-hidden shadow-2xl border-4 border-white">
     <Image
       src="/clinicimage.jpg"
       alt="Prime Dental Studio Clinic"
@@ -490,26 +574,26 @@ if (loading) {
           Our Services
 
         </h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8 max-w-7xl mx-auto">
 
   {services.map((service, index) => (
 
     <div
       key={index}
-      className="group bg-white rounded-3xl p-8 text-center border border-sky-100 shadow-lg hover:shadow-2xl hover:-translate-y-3 hover:bg-sky-600 transition-all duration-300"
+      className="group bg-white rounded-3xl p-5 md:p-8 text-center border border-sky-100 shadow-md hover:shadow-2xl hover:-translate-y-2 hover:border-sky-400 transition-all duration-300"
     >
 
-      <div className="w-20 h-20 mx-auto rounded-full bg-sky-100 flex items-center justify-center text-sky-600 group-hover:bg-white group-hover:text-sky-600 transition">
+      <div className="w-16 h-16 md:w-20 md:h-20 mx-auto rounded-full bg-gradient-to-r from-sky-100 to-cyan-100 flex items-center justify-center text-sky-600 group-hover:scale-110 transition-all duration-300">
 
         {service.icon}
 
       </div>
 
-      <h3 className="text-xl font-bold mt-6 text-slate-800 group-hover:text-white">
+      <h3 className="text-base md:text-xl font-bold mt-5 text-slate-800">
   {service.title}
 </h3>
 
-      <p className="mt-3 text-sm text-gray-600 group-hover:text-blue-100">
+      <p className="mt-2 text-xs md:text-sm text-gray-600 leading-6">
         Advanced dental treatment with modern technology and expert care.
       </p>
 
@@ -528,7 +612,7 @@ if (loading) {
     Meet Our Expert Doctors
   </h2>
 
-  <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
 
     {[
       {
@@ -548,30 +632,40 @@ if (loading) {
     ].map((doc, index) => (
       <div
         key={index}
-        className="bg-white rounded-3xl shadow-xl p-8 hover:-translate-y-2 hover:shadow-2xl transition duration-300"
+        className="bg-white rounded-3xl border border-sky-100 shadow-lg p-6 md:p-8 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
       >
         <div className="flex flex-col items-center">
 
           {/* Doctor Photo */}
-          <div className="w-32 h-32 rounded-full bg-sky-100 flex items-center justify-center text-5xl mb-6">
+          <div className="w-28 h-28 md:w-32 md:h-32 rounded-full bg-gradient-to-r from-sky-100 to-cyan-100 flex items-center justify-center text-5xl shadow-lg mb-6">
             👨‍⚕️
           </div>
 
-          <h3 className="text-2xl font-bold text-sky-700 text-center">
+          <h3 className="text-2xl font-extrabold text-sky-700 text-center">
             {doc.name}
           </h3>
 
-          <p className="text-gray-600 text-center mt-3">
+          <p className="text-gray-700 text-center mt-3 leading-7">
             {doc.specialist}
           </p>
 
-          <p className="font-semibold text-sky-600 mt-4">
+          <p className="inline-block bg-sky-100 text-sky-700 px-4 py-2 rounded-full font-semibold mt-5">
             {doc.experience}
           </p>
 
-          <p className="text-gray-500 mt-2">
+          <p className="text-gray-600 mt-4">
             {doc.hospital}
           </p>
+          <div className="mt-6">
+
+<a
+href="#appointment"
+className="inline-block bg-gradient-to-r from-sky-600 to-cyan-500 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition"
+>
+Book Consultation
+</a>
+
+</div>
 
         </div>
       </div>
@@ -616,19 +710,23 @@ if (loading) {
     ].map((item, index) => (
       <div
         key={index}
-        className="bg-white rounded-3xl shadow-lg p-8 hover:-translate-y-2 hover:shadow-2xl transition duration-300"
+        className="bg-white rounded-3xl border border-sky-100 shadow-lg p-6 md:p-8 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
       >
         <div className="text-yellow-400 text-2xl">
           {item.rating}
         </div>
+        
+        <div className="inline-flex items-center gap-2 bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-semibold">
+⭐ 5.0 Patient Rating
+</div>
 
-        <p className="text-gray-600 mt-4 leading-7 italic">
+        <p className="text-gray-700 mt-5 leading-8 italic">
           "{item.review}"
         </p>
 
         <div className="mt-6 flex items-center gap-4">
 
-          <div className="w-14 h-14 rounded-full bg-sky-600 text-white flex items-center justify-center text-xl font-bold">
+          <div className="w-14 h-14 rounded-full bg-gradient-to-r from-sky-600 to-cyan-500 text-white flex items-center justify-center text-xl font-bold shadow-md">
             {item.name.charAt(0)}
           </div>
 
@@ -663,22 +761,25 @@ if (loading) {
     We combine experience, technology, and compassionate care to give you the best dental experience.
   </p>
 
-  <div className="grid md:grid-cols-4 gap-8 max-w-7xl mx-auto">
+  <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8 max-w-7xl mx-auto">
 
-    <div className="bg-sky-50 rounded-3xl p-8 text-center hover:shadow-xl transition">
-      <div className="text-5xl mb-4">🦷</div>
-      <h3 className="text-xl font-bold">Advanced Technology</h3>
-      <p className="text-gray-600 mt-3">
+    <div className="bg-white rounded-3xl p-5 md:p-8 text-center border border-sky-100 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
+      <div className="text-4xl md:text-5xl mb-5">🦷</div>
+  <h3 className="text-2xl font-bold text-slate-900 mt-5"></h3>
+      <p className="text-gray-700 mt-4 leading-7">
         Modern equipment for safe and painless treatment.
       </p>
     </div>
 
-    <div className="bg-sky-50 rounded-3xl p-8 text-center hover:shadow-xl transition">
-      <div className="text-5xl mb-4">👨‍⚕️</div>
+    <div className="bg-white rounded-3xl p-8 text-center shadow-lg border border-sky-100 hover: -translate-y-2 hover: shadow-2xl transition-all duration-300">
+      <div className="text-lg md:text-xl font-bold text-slate-900" >👨‍⚕️</div>
       <h3 className="text-xl font-bold">Expert Dentists</h3>
-      <p className="text-gray-600 mt-3">
+      <p className="text-gray-600 mt-3 leading-7">
         Experienced specialists providing quality dental care.
       </p>
+      <p className="text-center text-gray-600 mt-4 mb-12 max-w-3xl mx-auto">
+  Experience advanced technology, compassionate care, and expert dental treatment designed to give you a healthy and confident smile.
+</p>
     </div>
 
     <div className="bg-sky-50 rounded-3xl p-8 text-center hover:shadow-xl transition">
@@ -706,7 +807,7 @@ if (loading) {
 
 
 {/* Appointment Form */}
-<section id="contact" className="py-16 px-6 bg-gradient-to-r from-sky-100 to-white">
+<section id="appointment" className="py-16 px-6 bg-gradient-to-r from-sky-100 to-white">
 
   <div className="max-w-3xl mx-auto">
 
@@ -727,8 +828,7 @@ if (loading) {
           type="text"
           placeholder="Full Name"
           required
-          className="border border-gray-300 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-400"
-          value={name}
+        className="w-full rounded-xl border border-sky-200 bg-slate-50 px-4 py-3 text-gray-900 outline-none transition-all focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
           onChange={(e) => setName(e.target.value)}
         />
 
@@ -738,7 +838,8 @@ if (loading) {
           required
           value={mobile}
           onChange={(e) => setMobile(e.target.value)}
-          className="border border-gray-300 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-400"
+          className="w-full rounded-xl border border-sky-200 bg-slate-50 px-4 py-3 text-gray-900 outline-none transition-all focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
+          
         />
 
         <input
@@ -747,14 +848,16 @@ if (loading) {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="border border-gray-300 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-400"
+          className="w-full rounded-xl border border-sky-200 bg-slate-50 px-4 py-3 text-gray-900 outline-none transition-all focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
+          
         />
 
         <select
           required
           value={treatment}
           onChange={(e) => setTreatment(e.target.value)}
-          className="border border-gray-300 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-400"
+          className="w-full rounded-xl border border-sky-200 bg-slate-50 px-4 py-3 text-gray-900 outline-none transition-all focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
+          
         >
           <option value="">Select Treatment</option>
           <option>Dental Implants</option>
@@ -778,19 +881,43 @@ if (loading) {
           min={new Date().toISOString().split("T")[0]}
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="border border-gray-300 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-400"
+          className="w-full rounded-xl border border-sky-200 bg-slate-50 px-4 py-3 text-gray-900 outline-none transition-all focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
+          
         />
 
         <button
-          type="submit"
-          className="bg-sky-600 hover:bg-sky-700 text-white py-3 rounded-lg font-semibold transition"
-        >
-          Book Now
-        </button>
+  type="submit"
+  disabled={loading}
+  className={`w-full py-4 rounded-xl font-bold text-lg text-white shadow-lg transition-all duration-300 ${
+    loading
+      ? "bg-gray-400 cursor-not-allowed"
+      : "bg-gradient-to-r from-sky-600 to-cyan-500 hover:shadow-2xl hover:scale-[1.02] active:scale-95"
+  }`}
+>
+  {loading ? "Booking..." : "Book My Appointment"}
+</button>
+<p className="text-center text-sm text-gray-500 mt-3">
+  We usually confirm appointments within <span className="font-semibold text-sky-600">15–30 minutes</span>.
+</p>
+
 
       </form>
 
     </div>
+     
+     <div className="mt-6 rounded-2xl border border-sky-100 bg-sky-50 p-5">
+  <h3 className="font-semibold text-slate-800 mb-2">
+    Consultation Includes
+  </h3>
+
+  <ul className="space-y-2 text-gray-700 text-sm">
+    <li>✔ Complete Dental Check-up</li>
+    <li>✔ Oral Health Assessment</li>
+    <li>✔ Personalized Treatment Advice</li>
+    <li>✔ Digital Treatment Consultation</li>
+  </ul>
+</div>
+
   </div>
 </section>
       
@@ -816,7 +943,8 @@ if (loading) {
   <a
     href="https://wa.me/9343460176"
     target="_blank"
-    className="bg-green-500 text-white p-4 rounded-full shadow-lg hover:scale-110 transition text-xl"
+    rel="noopener noreferer"
+     className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-green-500 shadow-2xl flex items-center justify-center text-white text-3xl hover:scale-110 transition-all duration-300"
   >
     <FaWhatsapp/>
   </a>
@@ -824,7 +952,7 @@ if (loading) {
   {/* Call Button */}
   <a
     href="tel:919343460176"
-    className="bg-blue-500 text-white p-4 rounded-full shadow-lg hover:scale-110 transition text-xl"
+     className="fixed bottom-24 right-6 z-50 w-16 h-16 rounded-full bg-sky-600 shadow-2xl flex items-center justify-center text-white text-3xl hover:scale-110 transition-all duration-300"
   >
     <FaPhoneAlt/>
   </a>
@@ -897,6 +1025,8 @@ if (loading) {
     © 2026 Prime Dental Studio. All Rights Reserved.
   </div>
 </footer>
+
+
 
     </main>
   )
