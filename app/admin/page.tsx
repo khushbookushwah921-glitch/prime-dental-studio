@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { db } from "../../lib/firebase";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 
+
 export default function AdminPage() {
   const [appointments, setAppointments] = useState<any[]>([]);
   const [search, setSearch] = useState("");
@@ -147,6 +148,7 @@ if (!isLoggedIn) {
           ))}
         </tbody>
       </table>
+
     </main>
   );
 }

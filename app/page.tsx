@@ -15,7 +15,10 @@ import {
   FaUserMd,
 } from "react-icons/fa";
 import FloatingOffer from "./components/FloatingOffer";
-
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import FAQ from "./components/FAQ";
+import { motion } from "framer-motion";
 
 export default function Home() {
 
@@ -245,225 +248,9 @@ if (loading) {
     loading ? "opacity-0 scale-95" : "opacity-100 scale-100"
   }`}
 >
-  <div className="hidden lg:flex justify-between items-center bg-sky-700 text-white px-10 py-2 text-sm">
-
-  <p>
-    📍 Delta-1, Shivam Plaza, Greater Noida
-  </p>
-
-  <div className="flex gap-8">
-
-    <p>🕒 Open 24×7</p>
-
-    <p>📧 primedentalstudio@gmail.com</p>
-
-  </div>
-
-</div>
-
-      <nav
-  className={` relative sticky top-0 z-50 bg-white border-b border-sky-100 shadow-md transition-all duration-300 ${
-    scrolled ? "py-2" : "py-4"
-  }`}
->
-
- <div className="max-w-7xl mx-auto flex items-center justify-between px-5 lg:px-8 py-4">
-
-  {/* Logo */}
-
-  <div className="flex items-center gap-3">
-
-    <Image
-  src="/logo.png"
-  alt="Prime Dental Studio"
-  width={180}
-  height={60}
-  priority
-  className={`w-auto transition-all duration-300 ${
-    scrolled ? "h-10" : "h-12"
-  }`}
-/>
-
-  </div>
-
-  {/* Menu */}
-
-  <div className="hidden lg:flex items-center gap-8">
-
-    <a href="#home" className="hover:text-sky-600 font-medium transition">Home</a>
-
-    <a href="#about" className="hover:text-sky-600 font-medium transition">About</a>
-
-    <a href="#services" className="hover:text-sky-600 font-medium transition">Services</a>
-
-    <a href="#doctors" className="hover:text-sky-600 font-medium transition">Doctors</a>
-
-    <a href="#contact" className="hover:text-sky-600 font-medium transition">Contact</a>
-
-  </div>
-
-  {/* Right Side */}
-
-  <div className="hidden lg:flex items-center gap-4">
-
-    <a
-      href="tel:+919343460176"
-      className="flex items-center gap-2 text-gray-700 font-semibold"
-    >
-      
-      <FaPhoneAlt size={20} />
-    </a>
-
-    <a
-      href="https://wa.me/919343460176"
-      target="_blank"
-      className="bg-green-500 text-white p-3 rounded-full hover:scale-110 transition"
-    >
-      <FaWhatsapp size={20} />
-    </a>
-
-    <a
-      href="#contact"
-      className="bg-gradient-to-r from-sky-600 to-cyan-500 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition"
-    >
-      Book Appointment
-    </a>
-
-  </div>
-
-  {/* Mobile Button */}
-
-  <button
-onClick={() => setMenuOpen(!menuOpen)}
-className="lg:hidden w-11 h-11 rounded-xl border border-sky-200 flex items-center justify-center text-2xl bg-white shadow-sm"
->
-{menuOpen ? "✕" : "☰"}
-</button>
-
-</div>
-    
-      
-
-  {/* Mobile Menu */}
-
-  {menuOpen && (
-  <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-2xl border-t border-sky-100 animate-in slide-in-from-top duration-300">
-
-    <div className="flex flex-col py-4">
-
-      {[
-        { name: "Home", link: "#home" },
-        { name: "About", link: "#about" },
-        { name: "Services", link: "#services" },
-        { name: "Doctors", link: "#doctors" },
-        { name: "Contact", link: "#contact" },
-      ].map((item) => (
-        <a
-          key={item.name}
-          href={item.link}
-          onClick={() => setMenuOpen(false)}
-          className="px-6 py-4 text-gray-800 font-semibold border-b border-sky-50 hover:bg-sky-50 hover:text-sky-600 transition-all"
-        >
-          {item.name}
-        </a>
-      ))}
-
-      <div className="px-6 pt-5">
-
-        <a
-          href="#contact"
-          onClick={() => setMenuOpen(false)}
-          className="block w-full bg-gradient-to-r from-sky-600 to-cyan-500 text-white text-center py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition"
-        >
-          Book Appointment
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-)}
-
-
-</nav>
-
- 
   
-    
-
-      {/* Hero Section */}
-
-      <section id="home"
-
-  className="relative min-h-[90vh] md:min-h-screen overflow-hidden bg-gradient-to-br from-cyan-50 via-sky-100 to-blue-200 px-5 md:px-6"
-  style={{
-  backgroundImage: "url('/hero.jpg')",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-}}
->
-  
-  <div className="absolute top-0 left-0 w-72 h-72 bg-cyan-300/30 rounded-full blur-3xl"></div>
-
-<div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl"></div>
-
-<div className="absolute top-40 right-20 w-40 h-40 bg-sky-300/30 rounded-full blur-2xl"></div>
-  <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/75 to-white/60"></div>
-  <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center justify-center text-center min-h-[90vh] px-4 py-24">
-    <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-slate-900 leading-tight tracking-tight max-w-4xl">
-      Advanced Dental Care for a Confident Smile
-    </h1>
-
-    <p className="mt-6 text-lg md:text-xl text-slate-700 leading-8 max-w-3xl">
-      Expert Dental Treatments, Advanced Technology, and Personalized Care for Every Patient in Greater Noida.
-    </p>
-    <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-
-  <div className="bg-white shadow-lg rounded-full px-6 py-3 border border-sky-100">
-    ⭐⭐⭐⭐⭐ Trusted by Hundreds of Patients
-  </div>
-
-  <div className="bg-sky-600 text-white rounded-full px-6 py-3 shadow-lg">
-    Open 24×7
-  </div>
-
-  <div className="mt-8 inline-flex items-center gap-2 bg-green-100 text-green-700 px-5 py-3 rounded-full border border-green-200 font-semibold shadow-sm">
-  🎉 Consultation Fee: <span className="font-bold">₹200 </span>
-</div>
-
-</div>
- <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-
-  <a
-    href="#appointment"
-    className="bg-gradient-to-r from-sky-600 to-cyan-500 text-white px-8 py-4 rounded-full font-semibold shadow-xl hover:scale-105 transition"
-  >
-    Book Appointment
-  </a>
-   
-
-  <a
-    href="tel:+919343460176"
-    className="border-2 border-sky-600 text-sky-700 px-8 py-4 rounded-full font-semibold hover:bg-sky-600 hover:text-white transition"
-  >
-    Call Now
-  </a>
-
-  <a
-    href="https://wa.me/919343460176"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="bg-green-500 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:scale-105 transition"
-  >
-    WhatsApp
-  </a>
-
-</div>
-
-  </div>
-</section>
+<Navbar />
+<Hero />
 
 {/* Special Offers */}
 
@@ -531,21 +318,63 @@ className="lg:hidden w-11 h-11 rounded-xl border border-sky-200 flex items-cente
 
     <div>
 
-      <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6">
-        About Prime Dental Studio
-      </h2>
+      <div className="inline-block px-4 py-2 rounded-full bg-sky-100 text-sky-700 font-semibold mb-4">
+  ✨ About Us
+</div>
 
-      <p className="text-gray-700 text-base md:text-lg leading-8 mb-6">
-        At <span className="font-semibold text-sky-600">Prime Dental Studio</span>,
-        we are dedicated to providing exceptional dental care with advanced technology,
-        experienced doctors, and a patient-first approach.
-      </p>
+<h2 className="text-4xl md:text-6xl font-black leading-tight text-slate-900">
+  Creating
+  <span className="text-sky-600"> Beautiful Smiles </span>
+  Every Day
+</h2>
+
+      <p className="mt-6 text-lg leading-8 text-gray-600">
+Prime Dental Studio is committed to providing world-class dental care with modern technology, experienced doctors, and a patient-first approach.
+
+From routine dental checkups to advanced smile makeovers and dental implants, we ensure every treatment is comfortable, painless, and personalized.
+</p>
 
       <p className="text-gray-700 leading-8">
         Whether it's a routine check-up, cosmetic smile makeover, dental implants,
         or emergency treatment, we ensure every patient receives comfortable,
         painless, and personalized dental care.
       </p>
+
+      <div className="grid grid-cols-2 gap-5 mt-10">
+
+  <div className="bg-gradient-to-r from-sky-100 to-cyan-100 rounded-2xl p-5 shadow-lg hover:scale-105 transition-all">
+    <div className="text-4xl">🦷</div>
+    <h3 className="font-bold text-lg mt-3">Advanced Technology</h3>
+    <p className="text-gray-600 text-sm mt-2">
+      Modern dental equipment for precise treatment.
+    </p>
+  </div>
+
+  <div className="bg-gradient-to-r from-green-100 to-emerald-100 rounded-2xl p-5 shadow-lg hover:scale-105 transition-all">
+    <div className="text-4xl">👨‍⚕️</div>
+    <h3 className="font-bold text-lg mt-3">Experienced Doctors</h3>
+    <p className="text-gray-600 text-sm mt-2">
+      10+ years of trusted dental expertise.
+    </p>
+  </div>
+
+  <div className="bg-gradient-to-r from-yellow-100 to-orange-100 rounded-2xl p-5 shadow-lg hover:scale-105 transition-all">
+    <div className="text-4xl">😊</div>
+    <h3 className="font-bold text-lg mt-3">Painless Treatment</h3>
+    <p className="text-gray-600 text-sm mt-2">
+      Comfortable care with a patient-first approach.
+    </p>
+  </div>
+
+  <div className="bg-gradient-to-r from-pink-100 to-rose-100 rounded-2xl p-5 shadow-lg hover:scale-105 transition-all">
+    <div className="text-4xl">💰</div>
+    <h3 className="font-bold text-lg mt-3">Affordable Care</h3>
+    <p className="text-gray-600 text-sm mt-2">
+      High-quality treatments at transparent prices.
+    </p>
+  </div>
+
+</div>
 
     </div>
 
@@ -568,33 +397,45 @@ className="lg:hidden w-11 h-11 rounded-xl border border-sky-200 flex items-cente
       
 
       <section id="services" className="py-20 bg-white px-6">
+<div className="text-center mb-14">
 
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
+  <span className="inline-block bg-sky-100 text-sky-700 px-5 py-2 rounded-full font-semibold">
+    ✨ Our Treatments
+  </span>
 
-          Our Services
+  <h2 className="mt-5 text-4xl md:text-5xl font-black text-slate-900">
+    Complete Dental Care
+    <span className="text-sky-600"> Under One Roof</span>
+  </h2>
 
-        </h2>
+  <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+    From routine dental checkups to smile makeovers, implants and cosmetic dentistry,
+    we provide comprehensive dental solutions for your entire family.
+  </p>
+
+</div>
+        
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8 max-w-7xl mx-auto">
 
   {services.map((service, index) => (
 
     <div
       key={index}
-      className="group bg-white rounded-3xl p-5 md:p-8 text-center border border-sky-100 shadow-md hover:shadow-2xl hover:-translate-y-2 hover:border-sky-400 transition-all duration-300"
+      className="group relative overflow-hidden rounded-3xl p-6 md:p-8 text-center bg-white border border-sky-100 shadow-lg hover:-translate-y-3 hover:shadow-[0_20px_50px_rgba(14,165,233,0.25)] transition-all duration-500"
     >
 
-      <div className="w-16 h-16 md:w-20 md:h-20 mx-auto rounded-full bg-gradient-to-r from-sky-100 to-cyan-100 flex items-center justify-center text-sky-600 group-hover:scale-110 transition-all duration-300">
+      <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-sky-500 via-cyan-500 to-blue-600 text-white flex items-center justify-center text-3xl shadow-xl group-hover:rotate-6 group-hover:scale-110 transition-all duration-500">
 
         {service.icon}
 
       </div>
 
-      <h3 className="text-base md:text-xl font-bold mt-5 text-slate-800">
+      <h3 className="text-lg md:text-2xl font-extrabold mt-6 text-slate-900" >
   {service.title}
 </h3>
 
       <p className="mt-2 text-xs md:text-sm text-gray-600 leading-6">
-        Advanced dental treatment with modern technology and expert care.
+        Personalized treatment using advanced technology for safe, painless and long-lasting results.
       </p>
 
     </div>
@@ -604,13 +445,90 @@ className="lg:hidden w-11 h-11 rounded-xl border border-sky-200 flex items-cente
 </div>
 </section>
 
+   {/* Before & After Smile Gallery */}
+
+<section className="py-24 bg-gradient-to-b from-white to-sky-50">
+
+  <div className="max-w-7xl mx-auto px-6">
+
+    <div className="text-center mb-14">
+
+      <span className="inline-block bg-sky-100 text-sky-700 px-5 py-2 rounded-full font-semibold">
+        ✨ Smile Gallery
+      </span>
+
+      <h2 className="mt-5 text-4xl md:text-5xl font-black text-slate-900">
+        Beautiful Smile
+        <span className="text-sky-600"> Transformations</span>
+      </h2>
+
+      <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+        See how our advanced dental treatments have transformed our patients' smiles.
+      </p>
+
+    </div>
+
+    <div className="grid md:grid-cols-3 gap-8">
+
+      {[1,2,3,4,5,6].map((item)=>(
+        <div
+          key={item}
+          className="group overflow-hidden rounded-3xl shadow-xl bg-white"
+        >
+
+          <div className="relative h-72 bg-gradient-to-br from-sky-100 to-cyan-100 flex items-center justify-center">
+
+            <span className="text-7xl">
+              😁
+            </span>
+
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition"></div>
+
+          </div>
+
+          <div className="p-5">
+
+            <h3 className="font-bold text-xl">
+              Smile Makeover
+            </h3>
+
+            <p className="text-gray-500 mt-2">
+              Cosmetic Dentistry & Teeth Whitening
+            </p>
+
+          </div>
+
+        </div>
+      ))}
+
+    </div>
+
+  </div>
+
+</section>
+
+
 {/* Doctors */}
 
 <section id="doctors" className="py-20 bg-sky-50 px-6">
 
-  <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
-    Meet Our Expert Doctors
+  <div className="text-center mb-14">
+
+  <span className="inline-block bg-sky-100 text-sky-700 px-5 py-2 rounded-full font-semibold">
+    👨‍⚕️ Our Experts
+  </span>
+
+  <h2 className="mt-5 text-4xl md:text-5xl font-black text-slate-900">
+    Meet Our
+    <span className="text-sky-600"> Experienced Doctors</span>
   </h2>
+
+  <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+    Our highly qualified dental specialists are committed to providing personalized,
+    painless and advanced dental care for every patient.
+  </p>
+
+</div>
 
   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
 
@@ -637,9 +555,9 @@ className="lg:hidden w-11 h-11 rounded-xl border border-sky-200 flex items-cente
         <div className="flex flex-col items-center">
 
           {/* Doctor Photo */}
-          <div className="w-28 h-28 md:w-32 md:h-32 rounded-full bg-gradient-to-r from-sky-100 to-cyan-100 flex items-center justify-center text-5xl shadow-lg mb-6">
-            👨‍⚕️
-          </div>
+          <div className="w-32 h-32 rounded-full bg-gradient-to-br from-sky-500 to-cyan-500 flex items-center justify-center text-white text-5xl shadow-xl">
+  👨‍⚕️
+</div>
 
           <h3 className="text-2xl font-extrabold text-sky-700 text-center">
             {doc.name}
@@ -649,7 +567,7 @@ className="lg:hidden w-11 h-11 rounded-xl border border-sky-200 flex items-cente
             {doc.specialist}
           </p>
 
-          <p className="inline-block bg-sky-100 text-sky-700 px-4 py-2 rounded-full font-semibold mt-5">
+          <p className="inline-block bg-gradient-to-r from-sky-500 to-cyan-500 text-white px-5 py-2 rounded-full font-bold mt-5 shadow-lg">
             {doc.experience}
           </p>
 
@@ -749,61 +667,151 @@ Book Consultation
 
 </section>
 
+
 {/* Why Choose Us */}
 
-<section className="py-20 bg-white px-6">
+<section className="py-24 bg-gradient-to-b from-sky-50 to-white">
 
-  <h2 className="text-4xl font-bold text-center text-gray-800">
-    Why Choose Prime Dental Studio?
-  </h2>
+  <div className="max-w-7xl mx-auto px-6">
 
-  <p className="text-center text-gray-500 mt-3 mb-12">
-    We combine experience, technology, and compassionate care to give you the best dental experience.
-  </p>
+    <div className="text-center mb-14">
 
-  <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8 max-w-7xl mx-auto">
+      <span className="inline-block bg-sky-100 text-sky-700 px-5 py-2 rounded-full font-semibold">
+        ⭐ Why Choose Us
+      </span>
 
-    <div className="bg-white rounded-3xl p-5 md:p-8 text-center border border-sky-100 shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
-      <div className="text-4xl md:text-5xl mb-5">🦷</div>
-  <h3 className="text-2xl font-bold text-slate-900 mt-5"></h3>
-      <p className="text-gray-700 mt-4 leading-7">
-        Modern equipment for safe and painless treatment.
+      <h2 className="mt-5 text-4xl md:text-5xl font-black text-slate-900">
+        Why Choose
+        <span className="text-sky-600"> Prime Dental Studio?</span>
+      </h2>
+
+      <p className="mt-4 max-w-2xl mx-auto text-gray-600">
+        We combine modern technology, experienced dentists and patient-focused
+        care to give you a comfortable and confident smile.
       </p>
+
     </div>
 
-    <div className="bg-white rounded-3xl p-8 text-center shadow-lg border border-sky-100 hover: -translate-y-2 hover: shadow-2xl transition-all duration-300">
-      <div className="text-lg md:text-xl font-bold text-slate-900" >👨‍⚕️</div>
-      <h3 className="text-xl font-bold">Expert Dentists</h3>
-      <p className="text-gray-600 mt-3 leading-7">
-        Experienced specialists providing quality dental care.
-      </p>
-      <p className="text-center text-gray-600 mt-4 mb-12 max-w-3xl mx-auto">
-  Experience advanced technology, compassionate care, and expert dental treatment designed to give you a healthy and confident smile.
-</p>
-    </div>
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
 
-    <div className="bg-sky-50 rounded-3xl p-8 text-center hover:shadow-xl transition">
-      <div className="text-5xl mb-4">😊</div>
-      <h3 className="text-xl font-bold">Patient-Centered Care</h3>
-      <p className="text-gray-600 mt-3">
-        Friendly environment with personalized treatment plans.
-      </p>
-    </div>
+      {[
+        {
+          icon: "🦷",
+          title: "Modern Equipment",
+          text: "Latest dental technology for accurate treatment.",
+        },
+        {
+          icon: "😊",
+          title: "Pain-Free Care",
+          text: "Comfortable and stress-free dental procedures.",
+        },
+        {
+          icon: "👨‍⚕️",
+          title: "Expert Dentists",
+          text: "Experienced doctors with personalized care.",
+        },
+        {
+          icon: "⭐",
+          title: "5000+ Happy Patients",
+          text: "Trusted by families across Greater Noida.",
+        },
+      ].map((item, index) => (
+        <div
+          key={index}
+          className="bg-white rounded-3xl p-8 shadow-lg border border-sky-100 hover:-translate-y-3 hover:shadow-2xl transition-all duration-300"
+        >
+          <div className="text-5xl">{item.icon}</div>
 
-    <div className="bg-sky-50 rounded-3xl p-8 text-center hover:shadow-xl transition">
-      <div className="text-5xl mb-4">⏰</div>
-      <h3 className="text-xl font-bold">Emergency Support</h3>
-      <p className="text-gray-600 mt-3">
-        Quick appointments and emergency dental services.
-      </p>
+          <h3 className="mt-5 text-xl font-bold text-slate-900">
+            {item.title}
+          </h3>
+
+          <p className="mt-3 text-gray-600 leading-7">
+            {item.text}
+          </p>
+        </div>
+      ))}
+
     </div>
 
   </div>
 
 </section>
 
+<section className="py-24 bg-white">
 
-          
+  <div className="max-w-7xl mx-auto px-6">
+
+    <div className="text-center mb-14">
+
+      <span className="inline-block bg-sky-100 text-sky-700 px-5 py-2 rounded-full font-semibold">
+        🦷 Our Process
+      </span>
+
+      <h2 className="mt-5 text-4xl md:text-5xl font-black text-slate-900">
+        Your Journey To A
+        <span className="text-sky-600"> Healthy Smile</span>
+      </h2>
+
+      <p className="mt-4 max-w-2xl mx-auto text-gray-600">
+        Simple, transparent and patient-friendly treatment process.
+      </p>
+
+    </div>
+
+    <div className="grid md:grid-cols-4 gap-8">
+
+      {[
+        {
+          step: "01",
+          title: "Book Appointment",
+          icon: "📅",
+        },
+        {
+          step: "02",
+          title: "Dental Check-up",
+          icon: "🦷",
+        },
+        {
+          step: "03",
+          title: "Treatment Plan",
+          icon: "📋",
+        },
+        {
+          step: "04",
+          title: "Healthy Smile",
+          icon: "😁",
+        },
+      ].map((item) => (
+
+        <div
+          key={item.step}
+          className="relative bg-sky-50 rounded-3xl p-8 text-center hover:-translate-y-2 hover:shadow-xl transition-all"
+        >
+
+          <div className="absolute top-5 right-5 text-sky-200 font-black text-5xl">
+            {item.step}
+          </div>
+
+          <div className="text-6xl mb-5">
+            {item.icon}
+          </div>
+
+          <h3 className="font-bold text-xl">
+            {item.title}
+          </h3>
+
+        </div>
+
+      ))}
+
+    </div>
+
+  </div>
+
+</section>
+
+<FAQ />
 
 
 {/* Appointment Form */}
@@ -811,18 +819,18 @@ Book Consultation
 
   <div className="max-w-3xl mx-auto">
 
-    <h2 className="text-3xl md:text-4xl font-extrabold text-center text-slate-900 mb-3">
+    <h2 className="text-4xl md:text-5xl font-black text-center text-slate-900">
   Book Your Appointment
 </h2>
 
-<p className="text-center text-gray-600 mb-10">
-  Schedule your visit with our experienced dental specialists.
+<p className="text-center text-gray-600 mt-4 mb-10">
+  Fill in your details and we'll contact you shortly to confirm your appointment.
 </p>
 
     {/* Card wrapper */}
-    <div className="bg-gradient-to-r from-sky-600 to-cyan-500 text-white py-4 rounded-xl font-bold shadow-lg hover:scale-105 transition duration-300">
+    <div className="bg-white rounded-[30px] shadow-2xl border border-sky-100 p-8 md:p-10">
 
-      <form onSubmit={handleAppointment} className="grid gap-5">
+      <form onSubmit={handleAppointment} className="grid md:grid-cols-2 gap-6">
 
         <input
           type="text"
@@ -888,7 +896,7 @@ Book Consultation
         <button
   type="submit"
   disabled={loading}
-  className={`w-full py-4 rounded-xl font-bold text-lg text-white shadow-lg transition-all duration-300 ${
+  className={`w-full md:col-span-2 py-4 rounded-xl text-lg font-bold transition-all duration-300  ${
     loading
       ? "bg-gray-400 cursor-not-allowed"
       : "bg-gradient-to-r from-sky-600 to-cyan-500 hover:shadow-2xl hover:scale-[1.02] active:scale-95"
@@ -896,12 +904,13 @@ Book Consultation
 >
   {loading ? "Booking..." : "Book My Appointment"}
 </button>
-<p className="text-center text-sm text-gray-500 mt-3">
-  We usually confirm appointments within <span className="font-semibold text-sky-600">15–30 minutes</span>.
-</p>
 
 
       </form>
+      <p className="text-center text-sm text-gray-500 mt-3">
+  We usually confirm appointments within <span className="font-semibold text-sky-600">15–30 minutes</span>.
+</p>
+
 
     </div>
      
@@ -920,116 +929,231 @@ Book Consultation
 
   </div>
 </section>
-      
+      {/* Contact Section */}
 
-
-
-    
-
-
-
-      {/* Contact */}
-
-      <section id="contact" className="bg-slate-900 text-white py-16 text-center">
-
-  <h2 className="text-4xl font-bold mb-6">
-
-    Contact Us
-
-  </h2>
-  <div className="fixed bottom-5 right-5 flex flex-col gap-3 z-50">
-  
-  {/* WhatsApp Button */}
-  <a
-    href="https://wa.me/9343460176"
-    target="_blank"
-    rel="noopener noreferer"
-     className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-green-500 shadow-2xl flex items-center justify-center text-white text-3xl hover:scale-110 transition-all duration-300"
-  >
-    <FaWhatsapp/>
-  </a>
-
-  {/* Call Button */}
-  <a
-    href="tel:919343460176"
-     className="fixed bottom-24 right-6 z-50 w-16 h-16 rounded-full bg-sky-600 shadow-2xl flex items-center justify-center text-white text-3xl hover:scale-110 transition-all duration-300"
-  >
-    <FaPhoneAlt/>
-  </a>
-
-</div>
-
-<div className="max-w-4xl mx-auto mt-12 text-center">
-  <h3 className="text-2xl font-bold mb-4">
-    Prime Dental Studio
-  </h3>
-
-  <p>📍 Delta-1, Shivam Plaza, Greater Noida</p>
-  <p>📞 919343460176</p>
-  <p>🕒 Open 24×7</p>
-  <a
-  href="https://maps.google.com/?q=Delta-1+Shivam+Plaza+Greater+Noida"
-  target="_blank"
-  className="text-sky-600 font-semibold"
+<section
+  id="contact"
+  className="py-20 bg-gradient-to-b from-white to-sky-50"
 >
-  Get Directions
-</a>
-</div>
+  <div className="max-w-7xl mx-auto px-6">
 
+    <div className="text-center mb-14">
+      <span className="inline-block bg-sky-100 text-sky-700 px-5 py-2 rounded-full font-semibold">
+        📍 Contact Us
+      </span>
 
+      <h2 className="mt-5 text-4xl md:text-5xl font-black text-slate-900">
+        Visit Prime Dental Studio
+      </h2>
 
-  
-
-
-</section>
-
-<footer className="bg-slate-900 text-white py-10 px-6">
-  <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
-
-    <div>
-      <h3 className="text-2xl font-bold mb-3">
-        Prime Dental Studio
-      </h3>
-
-      <p className="text-gray-300">
-        Advanced Dental Care for a Confident Smile
+      <p className="mt-4 text-gray-600">
+        We'd love to welcome you to our clinic.
       </p>
     </div>
 
-    <div>
-      <h4 className="font-semibold mb-3">
-        Contact Info
-      </h4>
+    <div className="grid lg:grid-cols-2 gap-10">
 
-      <p>📍 Delta-1, Shivam Plaza, Greater Noida</p>
-      <p>📞 9343460176</p>
-      <p>🕒 Open 24×7</p>
+      {/* Left Card */}
+
+      <div className="bg-white rounded-3xl shadow-2xl p-8">
+
+        <div className="space-y-8">
+
+          <div>
+            <h3 className="font-bold text-xl text-sky-700">
+              📍 Address
+            </h3>
+
+            <p className="text-gray-600 mt-2">
+              Delta-1, Shivam Plaza,
+              Greater Noida, Uttar Pradesh
+            </p>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-xl text-sky-700">
+              📞 Phone
+            </h3>
+
+            <a
+              href="tel:+919343460176"
+              className="text-gray-600 hover:text-sky-600"
+            >
+              +91 93434 60176
+            </a>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-xl text-sky-700">
+              📧 Email
+            </h3>
+
+            <p className="text-gray-600">
+              primedentalstudio@gmail.com
+            </p>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-xl text-sky-700">
+              🕒 Timing
+            </h3>
+
+            <p className="text-gray-600">
+              Open 24×7
+            </p>
+          </div>
+
+        </div>
+
+        <div className="flex gap-4 mt-10">
+
+          <a
+            href="tel:+919343460176"
+            className="flex-1 text-center bg-sky-600 text-white py-4 rounded-xl font-bold hover:bg-sky-700 transition"
+          >
+            📞 Call Now
+          </a>
+
+          <a
+            href="https://wa.me/919343460176"
+            target="_blank"
+            className="flex-1 text-center bg-green-500 text-white py-4 rounded-xl font-bold hover:bg-green-600 transition"
+          >
+            💬 WhatsApp
+          </a>
+
+        </div>
+
+      </div>
+
+      {/* Google Map */}
+
+      <div className="rounded-3xl overflow-hidden shadow-2xl">
+
+        <iframe
+          src="https://www.google.com/maps?q=Prime+Dental+Studio+Greater+Noida&output=embed"
+          width="100%"
+          height="100%"
+          className="min-h-[500px] border-0"
+          loading="lazy"
+        ></iframe>
+
+      </div>
+
     </div>
 
-    <div>
-      <h4 className="font-semibold mb-3">
-        Quick Links
-      </h4>
+  </div>
+</section>
 
-      <div className="flex flex-col gap-2">
-        <a href="#home">Home</a>
-        <a href="#services">Services</a>
-        <a href="#doctors">Doctors</a>
-        <a href="#contact">Contact</a>
+{/* Footer */}
+
+<footer className="bg-slate-900 text-white pt-16 pb-8">
+  <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10">
+
+    {/* Clinic */}
+
+    <div>
+      <Image
+        src="/logo.png"
+        alt="Prime Dental Studio"
+        width={180}
+        height={180}
+      />
+
+      <p className="mt-5 text-gray-300 leading-7">
+        Prime Dental Studio provides advanced, painless and affordable dental
+        treatments with modern technology and compassionate care.
+      </p>
+    </div>
+
+    {/* Quick Links */}
+
+    <div>
+      <h3 className="text-2xl font-bold mb-5">
+        Quick Links
+      </h3>
+
+      <div className="space-y-3">
+
+        <a href="#home" className="block hover:text-sky-400">
+          Home
+        </a>
+
+        <a href="#about" className="block hover:text-sky-400">
+          About
+        </a>
+
+        <a href="#services" className="block hover:text-sky-400">
+          Services
+        </a>
+
+        <a href="#appointment" className="block hover:text-sky-400">
+          Appointment
+        </a>
+
+        <a href="#contact" className="block hover:text-sky-400">
+          Contact
+        </a>
+
+      </div>
+    </div>
+
+    {/* Contact */}
+
+    <div>
+      <h3 className="text-2xl font-bold mb-5">
+        Contact
+      </h3>
+
+      <div className="space-y-4 text-gray-300">
+
+        <p>📍 Delta-1, Shivam Plaza, Greater Noida</p>
+
+        <p>📞 +91 93434 60176</p>
+
+        <p>📧 primedentalstudio@gmail.com</p>
+
+        <p>🕒 Open 24×7</p>
+
       </div>
     </div>
 
   </div>
 
-  <div className="border-t border-gray-700 mt-8 pt-4 text-center text-gray-400">
-    © 2026 Prime Dental Studio. All Rights Reserved.
+  <div className="border-t border-slate-700 mt-12 pt-6 text-center text-gray-400">
+    © {new Date().getFullYear()} Prime Dental Studio. All Rights Reserved.
   </div>
 </footer>
 
+{/* Floating WhatsApp */}
+
+<a
+  href="https://wa.me/919343460176"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="fixed bottom-6 left-6 z-[9999] w-16 h-16 rounded-full bg-green-500 shadow-2xl flex items-center justify-center text-white text-3xl hover:scale-110 transition-all duration-300 animate-bounce"
+>
+  <FaWhatsapp />
+</a>
+
+{/* Back To Top */}
+
+{showTopButton && (
+  <button
+    onClick={() =>
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+    }
+    className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-sky-600 text-white shadow-2xl hover:bg-sky-700 hover:scale-110 transition-all duration-300"
+  >
+    ↑
+  </button>
+)}
+
+</main>
+  )};
 
 
-    </main>
-  )
-
-};
 
