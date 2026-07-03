@@ -783,7 +783,7 @@ Book Consultation
 
     </div>
 
-    <div className="grid md:grid-cols-4 gap-8">
+    <div className=" grid md:grid-cols-4 gap-8 font-black text-slate-900">
 
       {[
         {
@@ -810,10 +810,10 @@ Book Consultation
 
         <div
           key={item.step}
-          className="relative bg-sky-50 rounded-3xl p-8 text-center hover:-translate-y-2 hover:shadow-xl transition-all"
+          className="relative bg-sky-100 rounded-3xl p-8 text-center hover:-translate-y-2 hover:shadow-xl transition-all"
         >
 
-          <div className="absolute top-5 right-5 text-sky-200 font-black text-5xl">
+          <div className="absolute top-5 right-5 text-sky-400 font-black text-5xl">
             {item.step}
           </div>
 
@@ -821,7 +821,7 @@ Book Consultation
             {item.icon}
           </div>
 
-          <h3 className="font-bold text-xl">
+          <h3 className="font-lgbold text-xl">
             {item.title}
           </h3>
 
@@ -912,6 +912,7 @@ Book Consultation
           type="date"
           min={new Date().toISOString().split("T")[0]}
           value={date}
+          placeholder="dd-mm-yyyy"
           onChange={(e) => setDate(e.target.value)}
           className="w-full rounded-xl border border-sky-200 bg-slate-50 px-4 py-3 text-gray-900 outline-none transition-all focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
           

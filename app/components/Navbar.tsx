@@ -35,7 +35,7 @@ export default function Navbar() {
   const menuItems = [
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
+    { name: "Our Treatment", href: "#our Treatment" },
     { name: "Doctors", href: "#doctors" },
     { name: "Contact", href: "#contact" },
   ];
