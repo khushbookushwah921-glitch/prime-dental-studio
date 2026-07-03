@@ -60,7 +60,7 @@ export default function Navbar() {
             : "bg-white"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-5 lg:px-8 h-24 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto flex h-16 sm:h-20 lg:h-24 items-center justify-between px-4 sm:px-6 lg:px-8">
 
           {/* Logo */}
           <Link href="/">
@@ -69,9 +69,7 @@ export default function Navbar() {
               alt="Prime Dental Studio"
               width={220}
               height={80}
-              className={`w-auto transition-all duration-500 ${
-                scrolled ? "h-16" : "h-20"
-              }`}
+              className="h-10 sm:h-12 lg:h-16 w-auto object-contain"
               priority
             />
           </Link>
@@ -115,43 +113,79 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Button */}
-          <button
+         <button
   onClick={() => setMenuOpen(!menuOpen)}
-  className="lg:hidden p-2 rounded-lg text-slate-900 hover:bg-slate-100 transition"
+  className="lg:hidden rounded-xl p-2 transition hover:bg-sky-100"
 >
   {menuOpen ? (
-    <HiX className="w-8 h-8" />
+    <HiX className="text-3xl text-slate-900" />
   ) : (
-    <HiOutlineMenuAlt3 className="w-8 h-8" />
+    <HiOutlineMenuAlt3 className="text-3xl text-slate-900" />
   )}
 </button>
+
         </div>
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div className="lg:hidden absolute left-0 right-0 top-full bg-white border-t border-gray-200 shadow-2xl z-50">
-            {menuItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                className="block px-6 py-4 border-b hover:bg-sky-50 font-semibold"
-              >
-                {item.name}
-              </a>
-            ))}
+  <>
+    <div
+      onClick={() => setMenuOpen(false)}
+      className="fixed inset-0 z-40 bg-black/50 backdrop-blur-md lg:hidden"
+    />
 
-            <div className="p-5">
-              <a
-                href="#appointment"
-                onClick={() => setMenuOpen(false)}
-                className="block px-6 py-4 border-b text-slate-800 font-semibold hover:bg-sky-50"
-              >
-                Book Appointment
-              </a>
-            </div>
-          </div>
-        )}
+    <div className="fixed top-0 right-0 z-50 h-screen w-[85%] max-w-[340px] bg-white shadow-2xl lg:hidden overflow-y-auto transition duration-300"
+    style={{
+  animation: "slideIn 0.35s ease"
+}}
+    >
+
+      <div className="flex items-center justify-between border-b p-5">
+
+        <Image
+          src="/logo.png"
+          alt="Prime Dental Studio"
+          width={150}
+          height={50}
+          className="h-10 w-auto"
+        />
+
+        <button onClick={() => setMenuOpen(false)}>
+          <HiX className="text-3xl text-slate-800" />
+        </button>
+
+      </div>
+
+      <nav className="flex flex-col mt-3">
+
+        {menuItems.map((item) => (
+          <a
+            key={item.name}
+            href={item.href}
+            onClick={() => setMenuOpen(false)}
+            className="px-6 py-5 text-lg font-semibold text-slate-700 border-b hover:bg-sky-50 transition"
+          >
+            {item.name}
+          </a>
+        ))}
+
+      </nav>
+
+      <div className="p-6">
+
+        <a
+          href="#appointment"
+          onClick={() => setMenuOpen(false)}
+          className="block rounded-full bg-gradient-to-r from-sky-600 to-cyan-500 py-4 text-center font-semibold text-white shadow-lg"
+        >
+          Book Appointment
+        </a>
+
+      </div>
+
+    </div>
+  </>
+)}
       </header>
     </>
   );

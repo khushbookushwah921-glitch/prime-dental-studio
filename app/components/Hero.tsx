@@ -14,7 +14,7 @@ export default function Hero() {
   {/* Animated Background */}
 
   <motion.div
-  className="absolute -top-20 -left-20 w-80 h-80 rounded-full bg-blue-600 opacity-70 blur-[80px]"
+  className="absolute -top-20 -left-20 w-80 h-80 rounded-full bg-white-100 opacity-40 blur-[50px]"
   animate={{
     x: [0, 40, 0],
     y: [0, 30, 0],
@@ -92,11 +92,11 @@ export default function Hero() {
     ⭐ 4.9 Google Rating
   </div>
 
-  <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-5 py-3 rounded-full shadow-lg font-semibold animate-pulse">
+  <div className="bg-gradient-to-r from-green-700 to-emerald-500 text-black px-5 py-3 rounded-full shadow-lg font-semibold animate-pulse">
     🎉 Consultation Fee ₹200
   </div>
 
-  <div className="bg-sky-600 text-white px-5 py-3 rounded-full shadow-lg font-semibold">
+  <div className="bg-sky-600 text-black px-5 py-3 rounded-full shadow-lg font-semibold">
     🕒 Open 24×7
   </div>
 
@@ -125,6 +125,7 @@ export default function Hero() {
     ease: "easeInOut",
   }}
 />
+
 Advanced Dental Care
 With Modern Technology 
   <br />

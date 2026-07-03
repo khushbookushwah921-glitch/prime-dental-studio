@@ -360,24 +360,24 @@ From routine dental checkups to advanced smile makeovers and dental implants, we
 
   <div className="bg-gradient-to-r from-green-200 to-emerald-100 rounded-2xl p-5 shadow-lg hover:scale-105 transition-all">
     <div className="text-4xl">👨‍⚕️</div>
-    <h3 className="font-bold text-lg mt-3">Experienced Doctors</h3>
-    <p className="text-gray-600 text-sm mt-2">
+    <h3 className="mt-3 text-xl font-extrabold text-slate-900">Experienced Doctors</h3>
+    <p className="mt-2 text-base text-slate-700 leading-7">
       10+ years of trusted dental expertise.
     </p>
   </div>
 
   <div className="bg-gradient-to-r from-yellow-200 to-orange-100 rounded-2xl p-5 shadow-lg hover:scale-105 transition-all">
     <div className="text-4xl">😊</div>
-    <h3 className="font-bold text-lg mt-3">Painless Treatment</h3>
-    <p className="text-gray-600 text-sm mt-2">
+    <h3 className="mt-3 text-xl font-extrabold text-slate-900">Painless Treatment</h3>
+    <p className="mt-2 text-base text-slate-700 leading-7">
       Comfortable care with a patient-first approach.
     </p>
   </div>
 
   <div className="bg-gradient-to-r from-pink-200 to-rose-100 rounded-2xl p-5 shadow-lg hover:scale-105 transition-all">
     <div className="text-4xl">💰</div>
-    <h3 className="font-bold text-lg mt-3">Affordable Care</h3>
-    <p className="text-gray-600 text-sm mt-2">
+    <h3 className="mt-3 text-xl font-extrabold text-slate-900">Affordable Care</h3>
+    <p className="mt-2 text-base text-slate-700 leading-7">
       High-quality treatments at transparent prices.
     </p>
   </div>
