@@ -19,6 +19,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import FAQ from "./components/FAQ";
 import { motion } from "framer-motion";
+import { FaArrowRight } from "react-icons/fa";
 
 export default function Home() {
 
@@ -202,7 +203,7 @@ if (loading) {
   return (
     <div className="fixed inset-0 z-50 bg-gradient-to-br from-sky-100 via-white to-cyan-100 flex items-center justify-center animate-fadeIn">
 
-      <div className="text-center">
+      <div className="text-center px-6">
 
         <div className="animate-pulse">
           <Image
@@ -215,9 +216,16 @@ if (loading) {
           />
         </div>
 
-        <h1 className="mt-6 text-4xl font-bold text-sky-700">
+         {/* Welcome Text */}
+        <p className="mt-5 text-lg md:text-xl font-semibold tracking-widest uppercase text-sky-600 animate-pulse">
+          Welcome To
+        </p>
+
+              <h1 className="mt-2 text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-sky-700 via-cyan-500 to-sky-700 bg-clip-text text-transparent animate-in fade-in zoom-in duration-700">
           Prime Dental Studio
         </h1>
+
+        
 
         <p className="mt-3 text-lg text-gray-600">
           Creating Beautiful Smiles...
@@ -342,15 +350,15 @@ From routine dental checkups to advanced smile makeovers and dental implants, we
 
       <div className="grid grid-cols-2 gap-5 mt-10">
 
-  <div className="bg-gradient-to-r from-sky-100 to-cyan-100 rounded-2xl p-5 shadow-lg hover:scale-105 transition-all">
+  <div className="bg-gradient-to-r from-sky-200 to-cyan-100 rounded-2xl p-5 shadow-lg hover:scale-105 transition-all">
     <div className="text-4xl">🦷</div>
-    <h3 className="font-bold text-lg mt-3">Advanced Technology</h3>
-    <p className="text-gray-600 text-sm mt-2">
+    <h3 className="mt-3 text-xl font-extrabold text-slate-900">Advanced Technology</h3>
+    <p className="mt-2 text-base text-slate-700 leading-7">
       Modern dental equipment for precise treatment.
     </p>
   </div>
 
-  <div className="bg-gradient-to-r from-green-100 to-emerald-100 rounded-2xl p-5 shadow-lg hover:scale-105 transition-all">
+  <div className="bg-gradient-to-r from-green-200 to-emerald-100 rounded-2xl p-5 shadow-lg hover:scale-105 transition-all">
     <div className="text-4xl">👨‍⚕️</div>
     <h3 className="font-bold text-lg mt-3">Experienced Doctors</h3>
     <p className="text-gray-600 text-sm mt-2">
@@ -358,7 +366,7 @@ From routine dental checkups to advanced smile makeovers and dental implants, we
     </p>
   </div>
 
-  <div className="bg-gradient-to-r from-yellow-100 to-orange-100 rounded-2xl p-5 shadow-lg hover:scale-105 transition-all">
+  <div className="bg-gradient-to-r from-yellow-200 to-orange-100 rounded-2xl p-5 shadow-lg hover:scale-105 transition-all">
     <div className="text-4xl">😊</div>
     <h3 className="font-bold text-lg mt-3">Painless Treatment</h3>
     <p className="text-gray-600 text-sm mt-2">
@@ -366,7 +374,7 @@ From routine dental checkups to advanced smile makeovers and dental implants, we
     </p>
   </div>
 
-  <div className="bg-gradient-to-r from-pink-100 to-rose-100 rounded-2xl p-5 shadow-lg hover:scale-105 transition-all">
+  <div className="bg-gradient-to-r from-pink-200 to-rose-100 rounded-2xl p-5 shadow-lg hover:scale-105 transition-all">
     <div className="text-4xl">💰</div>
     <h3 className="font-bold text-lg mt-3">Affordable Care</h3>
     <p className="text-gray-600 text-sm mt-2">
@@ -424,6 +432,8 @@ From routine dental checkups to advanced smile makeovers and dental implants, we
       className="group relative overflow-hidden rounded-3xl p-6 md:p-8 text-center bg-white border border-sky-100 shadow-lg hover:-translate-y-3 hover:shadow-[0_20px_50px_rgba(14,165,233,0.25)] transition-all duration-500"
     >
 
+      <div className="absolute -top-24 -right-24 h-48 w-48 rounded-full bg-sky-400/10 blur-3xl transition-all duration-700 group-hover:scale-150 group-hover:bg-sky-400/20"></div>
+
       <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-sky-500 via-cyan-500 to-blue-600 text-white flex items-center justify-center text-3xl shadow-xl group-hover:rotate-6 group-hover:scale-110 transition-all duration-500">
 
         {service.icon}
@@ -438,6 +448,22 @@ From routine dental checkups to advanced smile makeovers and dental implants, we
         Personalized treatment using advanced technology for safe, painless and long-lasting results.
       </p>
 
+        <div className="mt-6 flex justify-center">
+
+  <a
+  href="#"
+  className="group relative overflow-hidden rounded-3xl p-6 md:p-8 text-center bg-white border border-sky-100 shadow-lg hover:-translate-y-4 hover:scale-[1.03] hover:border-sky-300 hover:shadow-[0_25px_60px_rgba(14,165,233,0.30)] transition-all duration-500"
+>
+  <span>
+    Learn More
+  </span>
+
+  <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-2" />
+
+  <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-sky-600 transition-all duration-300 group-hover:w-full"></span>
+</a>
+
+</div>
     </div>
 
   ))}
@@ -468,35 +494,33 @@ From routine dental checkups to advanced smile makeovers and dental implants, we
 
     </div>
 
-    <div className="grid md:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
 
       {[1,2,3,4,5,6].map((item)=>(
-        <div
-          key={item}
-          className="group overflow-hidden rounded-3xl shadow-xl bg-white"
-        >
+       <div
+  key={item}
+  className="group overflow-hidden rounded-3xl bg-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+>
 
-          <div className="relative h-72 bg-gradient-to-br from-sky-100 to-cyan-100 flex items-center justify-center">
+          <div className="relative h-52 sm:h-60 lg:h-72 bg-gradient-to-br from-sky-200 via-cyan-100 to-blue-100 flex items-center justify-center overflow-hidden">
+            <span className="text-6xl sm:text-7xl transition-transform duration-300 group-hover:scale-110">
+    😁
+</span>
 
-            <span className="text-7xl">
-              😁
-            </span>
-
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition"></div>
-
+            <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition duration-300"></div>
           </div>
 
-          <div className="p-5">
+          <div className="p-5 sm:p-6">
 
-            <h3 className="font-bold text-xl">
-              Smile Makeover
-            </h3>
+    <h3 className="text-xl font-bold text-slate-900">
+        Smile Makeover
+    </h3>
 
-            <p className="text-gray-500 mt-2">
-              Cosmetic Dentistry & Teeth Whitening
-            </p>
+    <p className="mt-2 text-gray-600 leading-7">
+        Cosmetic Dentistry & Teeth Whitening
+    </p>
 
-          </div>
+</div>
 
         </div>
       ))}
@@ -1056,8 +1080,9 @@ Book Consultation
       <Image
         src="/logo.png"
         alt="Prime Dental Studio"
-        width={180}
-        height={180}
+        width={240}
+        height={80}
+        className="w-56 h-auto brightness-[3] contrast-[2]"
       />
 
       <p className="mt-5 text-gray-300 leading-7">

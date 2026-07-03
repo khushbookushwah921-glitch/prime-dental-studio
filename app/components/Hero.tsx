@@ -126,7 +126,7 @@ export default function Hero() {
   }}
 />
 Advanced Dental Care
-With Modern Technology
+With Modern Technology 
   <br />
   <span className="text-sky-600"> Your Smile,
     <br />

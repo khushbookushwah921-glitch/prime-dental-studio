@@ -56,7 +56,7 @@ export default function Navbar() {
       <header
         className={`sticky top-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-white/90 backdrop-blur-xl shadow-xl"
+            ? "bg-white shadow-xl"
             : "bg-white"
         }`}
       >
@@ -116,16 +116,20 @@ export default function Navbar() {
 
           {/* Mobile Button */}
           <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden text-3xl"
-          >
-            {menuOpen ? <HiX /> : <HiOutlineMenuAlt3 />}
-          </button>
+  onClick={() => setMenuOpen(!menuOpen)}
+  className="lg:hidden p-2 rounded-lg text-slate-900 hover:bg-slate-100 transition"
+>
+  {menuOpen ? (
+    <HiX className="w-8 h-8" />
+  ) : (
+    <HiOutlineMenuAlt3 className="w-8 h-8" />
+  )}
+</button>
         </div>
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div className="lg:hidden bg-white border-t shadow-xl">
+          <div className="lg:hidden absolute left-0 right-0 top-full bg-white border-t border-gray-200 shadow-2xl z-50">
             {menuItems.map((item) => (
               <a
                 key={item.name}
@@ -141,7 +145,7 @@ export default function Navbar() {
               <a
                 href="#appointment"
                 onClick={() => setMenuOpen(false)}
-                className="block text-center bg-sky-600 text-white rounded-full py-3 font-semibold"
+                className="block px-6 py-4 border-b text-slate-800 font-semibold hover:bg-sky-50"
               >
                 Book Appointment
               </a>
